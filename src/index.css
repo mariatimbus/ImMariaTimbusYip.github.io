@@ -1,0 +1,38 @@
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{margin:0;background:#000;color:#fff;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+a{color:inherit;text-decoration:none}
+
+.pixel-grid{
+  position:fixed;inset:0;z-index:-1;
+  background:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px) 0 0/12px 12px,
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px) 0 0/12px 12px;
+  pointer-events:none;
+}
+.scanlines::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode:overlay;
+}
+.pixel-card{
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:16px;
+  background:rgba(255,255,255,0.04);
+  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+  backdrop-filter:blur(10px);
+}
+.pixel-border{
+  outline:2px solid transparent;
+  transition:outline-color .18s;
+}
+.pixel-border:hover{
+  outline-color:rgba(255,255,255,0.6);
+}
+
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:.95}80%{opacity:.9}}
+.flicker{animation:flicker 2.5s infinite}
+
+@keyframes cursorBlink{50%{opacity:0}}
+.cursor::after{content:"_";margin-left:2px;animation:cursorBlink 1s steps(1) infinite}
